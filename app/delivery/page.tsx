@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Package, Truck, Clock, MapPin, CheckCircle, Phone, MessageSquare, AlertCircle } from "lucide-react"
+import { Package, Truck, Clock, MapPin, CheckCircle, Phone, MessageSquare, AlertCircle, Home } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
@@ -44,6 +44,30 @@ const statusColors = {
 } as const
 
 export default function DeliveryPage() {
+  const deliverySteps = [
+    {
+      icon: Package,
+      title: "Order Packed",
+      description: "Your order has been packed and is ready for delivery",
+      time: "10:30 AM",
+      completed: true
+    },
+    {
+      icon: Truck,
+      title: "Out for Delivery",
+      description: "Our delivery partner is on the way",
+      time: "11:45 AM",
+      completed: true
+    },
+    {
+      icon: Home,
+      title: "Arriving Soon",
+      description: "Expected delivery in 15 minutes",
+      time: "12:15 PM",
+      completed: false
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container py-8">
@@ -101,110 +125,70 @@ export default function DeliveryPage() {
             </Card>
           </div>
 
-          {/* Delivery Cards */}
-          <div className="space-y-6">
-            {deliveries.map((delivery) => (
-              <motion.div
-                key={delivery.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="group"
-              >
-                <Card className="p-6 hover:shadow-lg transition-shadow duration-200 bg-card">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-4">
-                        <div className={`w-3 h-3 rounded-full ${statusColors[delivery.status]}`} />
-                        <h3 className="text-lg font-semibold text-foreground">
-                          Order #{delivery.id}
-                        </h3>
-                        <span className={`px-3 py-1 rounded-full text-sm ${
-                          delivery.status === "Delivered" 
-                            ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
-                            : "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100"
-                        }`}>
-                          {delivery.status}
-                        </span>
-                      </div>
-                      
-                      <div className="mt-4 space-y-2">
-                        <div className="flex items-start space-x-2 text-muted-foreground">
-                          <MapPin className="w-5 h-5 mt-0.5" />
-                          <span>{delivery.address}</span>
-                        </div>
-                        <div className="flex items-center space-x-2 text-muted-foreground">
-                          <Package className="w-5 h-5" />
-                          <span>{delivery.items.join(", ")}</span>
-                        </div>
-                        <div className="flex items-center space-x-2 text-muted-foreground">
-                          <Clock className="w-5 h-5" />
-                          <span>{delivery.time}</span>
-                        </div>
-                      </div>
+          {/* Order Info */}
+          <Card className="p-6 mb-8">
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Order #FM2024046</h2>
+                <p className="text-muted-foreground">Estimated Delivery: Today, 12:30 PM</p>
+              </div>
+              <div className="text-right">
+                <span className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-600 text-sm">
+                  On Time
+                </span>
+              </div>
+            </div>
+            
+            <div className="border-t pt-4">
+              <h3 className="font-medium mb-2">Delivery Address</h3>
+              <p className="text-muted-foreground">
+                Amit Kumar Sharma<br />
+                A-101, Sunshine Heights<br />
+                Andheri West, Mumbai - 400053<br />
+                Phone: +91 9876543210
+              </p>
+            </div>
+          </Card>
 
-                      {/* Progress Bar */}
-                      {delivery.status === "In Transit" && (
-                        <div className="mt-4">
-                          <div className="flex justify-between text-sm mb-2">
-                            <span className="text-muted-foreground">Delivery Progress</span>
-                            <span className="text-foreground">{delivery.progress}%</span>
-                          </div>
-                          <Progress value={delivery.progress} className="h-2" />
-                          <div className="mt-2 text-sm text-muted-foreground">
-                            Current Location: {delivery.currentLocation}
-                          </div>
-                        </div>
-                      )}
+          {/* Tracking Steps */}
+          <div className="relative">
+            {deliverySteps.map((step, index) => (
+              <div key={index} className="flex items-start mb-8 relative">
+                {index < deliverySteps.length - 1 && (
+                  <div className={`absolute left-[15px] top-[30px] w-[2px] h-[calc(100%-10px)] ${step.completed ? "bg-green-500" : "bg-gray-200"}`} />
+                )}
+                <div className={`rounded-full p-2 ${step.completed ? "bg-green-500 text-white" : "bg-gray-200 text-gray-500"}`}>
+                  <step.icon className="h-5 w-5" />
+                </div>
+                <div className="ml-4 flex-1">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="font-medium">{step.title}</h3>
+                      <p className="text-muted-foreground text-sm">{step.description}</p>
                     </div>
-
-                    <div className="flex flex-col items-end space-y-4">
-                      <div className="text-right">
-                        <p className="font-medium text-foreground">
-                          {delivery.driver}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          {delivery.phone}
-                        </p>
-                      </div>
-                      
-                      <div className="flex flex-col space-y-2">
-                        <Button variant="outline" className="w-full">
-                          <Phone className="w-4 h-4 mr-2" />
-                          Call Driver
-                        </Button>
-                        <Button variant="outline" className="w-full">
-                          <MessageSquare className="w-4 h-4 mr-2" />
-                          Message
-                        </Button>
-                        <Button variant="outline" className="w-full">
-                          <AlertCircle className="w-4 h-4 mr-2" />
-                          Report Issue
-                        </Button>
-                      </div>
-                    </div>
+                    <span className="text-sm text-muted-foreground">{step.time}</span>
                   </div>
-
-                  {/* Payment Info */}
-                  <div className="mt-4 pt-4 border-t">
-                    <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Payment Status</span>
-                      <span className={`px-2 py-1 rounded-full text-sm ${
-                        delivery.paymentStatus === "Paid" 
-                          ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
-                          : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100"
-                      }`}>
-                        {delivery.paymentStatus}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center mt-2">
-                      <span className="text-muted-foreground">Order Amount</span>
-                      <span className="font-medium">{delivery.amount}</span>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
+                </div>
+              </div>
             ))}
           </div>
+
+          {/* Delivery Partner Info */}
+          <Card className="p-6 mt-8">
+            <h3 className="font-medium mb-4">Delivery Partner</h3>
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+                <span className="text-xl font-medium">RS</span>
+              </div>
+              <div className="ml-4">
+                <h4 className="font-medium">Rajesh Singh</h4>
+                <p className="text-muted-foreground text-sm">ID: FM-DEL-1234</p>
+              </div>
+              <button className="ml-auto bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90">
+                Contact
+              </button>
+            </div>
+          </Card>
         </motion.div>
       </div>
     </div>

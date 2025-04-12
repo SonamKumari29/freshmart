@@ -2,12 +2,13 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ShoppingCart, User, Search, Menu, Heart, Star } from "lucide-react"
+import { ShoppingCart, User, Search, Menu, Heart, Star, Truck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { Notifications } from "@/components/notifications"
 
 export function MainNav() {
   const pathname = usePathname()
@@ -70,11 +71,18 @@ export function MainNav() {
                   </Link>
                 </Button>
                 <Button variant="ghost" size="icon" asChild>
+                  <Link href="/delivery">
+                    <Truck className="h-5 w-5" />
+                    <span className="sr-only">Delivery</span>
+                  </Link>
+                </Button>
+                <Button variant="ghost" size="icon" asChild>
                   <Link href="/cart">
                     <ShoppingCart className="h-5 w-5" />
                     <span className="sr-only">Cart</span>
                   </Link>
                 </Button>
+                <Notifications />
                 <ThemeToggle />
               </div>
             </nav>
@@ -116,6 +124,13 @@ export function MainNav() {
               <span className="sr-only">Profile</span>
             </Link>
           </Button>
+          <Button variant="ghost" size="icon" asChild>
+            <Link href="/delivery">
+              <Truck className="h-5 w-5" />
+              <span className="sr-only">Delivery</span>
+            </Link>
+          </Button>
+          <Notifications />
           <Button variant="ghost" size="icon" asChild>
             <Link href="/cart">
               <ShoppingCart className="h-5 w-5" />

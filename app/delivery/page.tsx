@@ -70,78 +70,78 @@ export default function DeliveryPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container py-8">
+      <div className="container py-4 sm:py-8 px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="space-y-8"
+          className="space-y-6 sm:space-y-8"
         >
           {/* Header Section */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-foreground">
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
                 Your Deliveries
               </h1>
-              <p className="text-muted-foreground mt-1">
+              <p className="text-sm sm:text-base text-muted-foreground mt-1">
                 Track your orders in real-time
               </p>
             </div>
-            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-              <Clock className="w-4 h-4" />
+            <div className="flex items-center space-x-2 text-xs sm:text-sm text-muted-foreground">
+              <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               <span>Last updated: Just now</span>
             </div>
           </div>
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="p-6 bg-gradient-to-br from-green-400 to-green-600 text-white">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <Card className="p-4 sm:p-6 bg-gradient-to-br from-green-400 to-green-600 text-white">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm opacity-90">Total Deliveries</p>
-                  <h3 className="text-3xl font-bold mt-1">24</h3>
+                  <p className="text-xs sm:text-sm opacity-90">Total Deliveries</p>
+                  <h3 className="text-2xl sm:text-3xl font-bold mt-1">24</h3>
                 </div>
-                <Package className="w-8 h-8 opacity-80" />
+                <Package className="w-6 h-6 sm:w-8 sm:h-8 opacity-80" />
               </div>
             </Card>
 
-            <Card className="p-6 bg-gradient-to-br from-blue-400 to-blue-600 text-white">
+            <Card className="p-4 sm:p-6 bg-gradient-to-br from-blue-400 to-blue-600 text-white">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm opacity-90">In Transit</p>
-                  <h3 className="text-3xl font-bold mt-1">8</h3>
+                  <p className="text-xs sm:text-sm opacity-90">In Transit</p>
+                  <h3 className="text-2xl sm:text-3xl font-bold mt-1">8</h3>
                 </div>
-                <Truck className="w-8 h-8 opacity-80" />
+                <Truck className="w-6 h-6 sm:w-8 sm:h-8 opacity-80" />
               </div>
             </Card>
 
-            <Card className="p-6 bg-gradient-to-br from-purple-400 to-purple-600 text-white">
+            <Card className="p-4 sm:p-6 bg-gradient-to-br from-purple-400 to-purple-600 text-white">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm opacity-90">Delivered Today</p>
-                  <h3 className="text-3xl font-bold mt-1">16</h3>
+                  <p className="text-xs sm:text-sm opacity-90">Delivered Today</p>
+                  <h3 className="text-2xl sm:text-3xl font-bold mt-1">16</h3>
                 </div>
-                <CheckCircle className="w-8 h-8 opacity-80" />
+                <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 opacity-80" />
               </div>
             </Card>
           </div>
 
           {/* Order Info */}
-          <Card className="p-6 mb-8">
-            <div className="flex justify-between items-start mb-4">
+          <Card className="p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 sm:gap-0 mb-4">
               <div>
-                <h2 className="text-xl font-semibold mb-2">Order #FM2024046</h2>
-                <p className="text-muted-foreground">Estimated Delivery: Today, 12:30 PM</p>
+                <h2 className="text-lg sm:text-xl font-semibold mb-2">Order #FM2024046</h2>
+                <p className="text-sm text-muted-foreground">Estimated Delivery: Today, 12:30 PM</p>
               </div>
-              <div className="text-right">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-600 text-sm">
+              <div className="sm:text-right">
+                <span className="inline-flex items-center px-2 sm:px-3 py-1 rounded-full bg-green-100 text-green-600 text-xs sm:text-sm">
                   On Time
                 </span>
               </div>
             </div>
             
             <div className="border-t pt-4">
-              <h3 className="font-medium mb-2">Delivery Address</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-sm sm:text-base font-medium mb-2">Delivery Address</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Amit Kumar Sharma<br />
                 A-101, Sunshine Heights<br />
                 Andheri West, Mumbai - 400053<br />
@@ -151,22 +151,22 @@ export default function DeliveryPage() {
           </Card>
 
           {/* Tracking Steps */}
-          <div className="relative">
+          <div className="relative px-2 sm:px-4">
             {deliverySteps.map((step, index) => (
-              <div key={index} className="flex items-start mb-8 relative">
+              <div key={index} className="flex items-start mb-6 sm:mb-8 relative">
                 {index < deliverySteps.length - 1 && (
-                  <div className={`absolute left-[15px] top-[30px] w-[2px] h-[calc(100%-10px)] ${step.completed ? "bg-green-500" : "bg-gray-200"}`} />
+                  <div className={`absolute left-[13px] sm:left-[15px] top-[26px] sm:top-[30px] w-[2px] h-[calc(100%-10px)] ${step.completed ? "bg-green-500" : "bg-gray-200"}`} />
                 )}
-                <div className={`rounded-full p-2 ${step.completed ? "bg-green-500 text-white" : "bg-gray-200 text-gray-500"}`}>
-                  <step.icon className="h-5 w-5" />
+                <div className={`rounded-full p-1.5 sm:p-2 ${step.completed ? "bg-green-500 text-white" : "bg-gray-200 text-gray-500"}`}>
+                  <step.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
-                <div className="ml-4 flex-1">
-                  <div className="flex justify-between items-start">
+                <div className="ml-3 sm:ml-4 flex-1">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-0">
                     <div>
-                      <h3 className="font-medium">{step.title}</h3>
-                      <p className="text-muted-foreground text-sm">{step.description}</p>
+                      <h3 className="text-sm sm:text-base font-medium">{step.title}</h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground">{step.description}</p>
                     </div>
-                    <span className="text-sm text-muted-foreground">{step.time}</span>
+                    <span className="text-xs sm:text-sm text-muted-foreground">{step.time}</span>
                   </div>
                 </div>
               </div>
@@ -174,19 +174,19 @@ export default function DeliveryPage() {
           </div>
 
           {/* Delivery Partner Info */}
-          <Card className="p-6 mt-8">
-            <h3 className="font-medium mb-4">Delivery Partner</h3>
+          <Card className="p-4 sm:p-6">
+            <h3 className="text-sm sm:text-base font-medium mb-4">Delivery Partner</h3>
             <div className="flex items-center">
-              <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-                <span className="text-xl font-medium">RS</span>
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-200 rounded-full flex items-center justify-center">
+                <span className="text-lg sm:text-xl font-medium">RS</span>
               </div>
-              <div className="ml-4">
-                <h4 className="font-medium">Rajesh Singh</h4>
-                <p className="text-muted-foreground text-sm">ID: FM-DEL-1234</p>
+              <div className="ml-3 sm:ml-4">
+                <h4 className="text-sm sm:text-base font-medium">Rajesh Singh</h4>
+                <p className="text-xs sm:text-sm text-muted-foreground">ID: FM-DEL-1234</p>
               </div>
-              <button className="ml-auto bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90">
+              <Button className="ml-auto text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 h-auto">
                 Contact
-              </button>
+              </Button>
             </div>
           </Card>
         </motion.div>

@@ -1,13 +1,44 @@
-import { AdminNav } from "@/components/admin/admin-nav";
-import Link from "next/link";
-import { LayoutDashboard, Package, ShoppingCart, Users, Settings } from "lucide-react";
+"use client";
 
-const sidebarItems = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/products", label: "Products", icon: Package },
-  { href: "/admin/orders", label: "Orders", icon: ShoppingCart },
-  { href: "/admin/customers", label: "Customers", icon: Users },
-  { href: "/admin/settings", label: "Settings", icon: Settings },
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { 
+  LayoutDashboard, 
+  Package, 
+  Users, 
+  ShoppingCart,
+  Settings,
+  LogOut
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+const sidebarLinks = [
+  {
+    icon: LayoutDashboard,
+    label: "Dashboard",
+    href: "/admin",
+  },
+  {
+    icon: Package,
+    label: "Products",
+    href: "/admin/products",
+  },
+  {
+    icon: Users,
+    label: "Customers",
+    href: "/admin/customers",
+  },
+  {
+    icon: ShoppingCart,
+    label: "Orders",
+    href: "/admin/orders",
+  },
+  {
+    icon: Settings,
+    label: "Settings",
+    href: "/admin/settings",
+  },
 ];
 
 export default function AdminLayout({
@@ -15,31 +46,79 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
   return (
-    <div className="min-h-screen bg-background">
-      <AdminNav />
-      <div className="flex">
-        {/* Sidebar */}
-        <aside className="w-64 min-h-[calc(100vh-4rem)] bg-card border-r">
-          <nav className="p-4 space-y-2">
-            {sidebarItems.map((item) => {
-              const Icon = item.icon;
+    <div className="flex min-h-screen bg-background">
+      {/* Sidebar */}
+      <aside className="hidden md:flex w-64 flex-col border-r">
+        <div className="p-6 border-b">
+          <Link href="/admin" className="flex items-center space-x-2">
+            <span className="text-2xl font-bold text-primary">Admin</span>
+          </Link>
+        </div>
+        <ScrollArea className="flex-1 py-4">
+          <nav className="grid gap-1 px-2">
+            {sidebarLinks.map((link) => {
+              const Icon = link.icon;
+              const isActive = pathname === link.href;
               return (
                 <Link
-                  key={item.href}
-                  href={item.href}
-                  className="flex items-center space-x-3 px-4 py-2.5 text-sm font-medium rounded-lg hover:bg-accent text-foreground transition-colors"
+                  key={link.href}
+                  href={link.href}
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors ${
+                    isActive 
+                      ? "bg-primary text-primary-foreground" 
+                      : "hover:bg-accent hover:text-accent-foreground"
+                  }`}
                 >
-                  <Icon className="w-5 h-5" />
-                  <span>{item.label}</span>
+                  <Icon className="h-4 w-4" />
+                  {link.label}
                 </Link>
               );
             })}
           </nav>
-        </aside>
+        </ScrollArea>
+        <div className="mt-auto p-4 border-t">
+          <Button variant="outline" className="w-full justify-start" asChild>
+            <Link href="/admin/logout">
+              <LogOut className="mr-2 h-4 w-4" />
+              Logout
+            </Link>
+          </Button>
+        </div>
+      </aside>
+
+      {/* Mobile Header */}
+      <div className="flex flex-col flex-1">
+        <header className="sticky top-0 z-10 md:hidden flex items-center justify-between px-4 h-14 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <Link href="/admin" className="flex items-center space-x-2">
+            <span className="font-bold">Admin</span>
+          </Link>
+          <nav className="flex items-center gap-2">
+            {sidebarLinks.map((link) => {
+              const Icon = link.icon;
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`p-2 rounded-md ${
+                    isActive 
+                      ? "bg-primary text-primary-foreground" 
+                      : "hover:bg-accent hover:text-accent-foreground"
+                  }`}
+                >
+                  <Icon className="h-5 w-5" />
+                  <span className="sr-only">{link.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
+        </header>
 
         {/* Main Content */}
-        <main className="flex-1 p-8">
+        <main className="flex-1">
           {children}
         </main>
       </div>

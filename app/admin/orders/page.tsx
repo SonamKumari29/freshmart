@@ -3,7 +3,22 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Eye } from "lucide-react";
+import { Search } from "lucide-react";
+
+function SearchInput({ className, ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <div className="relative w-full sm:w-auto">
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+        <Search className="w-4 h-4" />
+      </div>
+      <Input
+        type="search"
+        className={`pl-9 max-w-sm w-full ${className}`}
+        {...props}
+      />
+    </div>
+  );
+}
 
 const orders = [
   {
@@ -63,11 +78,7 @@ export default function AdminOrders() {
       <Card className="p-6">
         <div className="flex gap-4 mb-6">
           <div className="flex-1">
-            <Input
-              placeholder="Search orders..."
-              className="max-w-sm"
-              prefix={<Search className="w-4 h-4 text-gray-400" />}
-            />
+            <SearchInput placeholder="Search orders..." />
           </div>
           <div className="flex gap-2">
             <Button variant="outline">Filter</Button>
@@ -120,7 +131,7 @@ export default function AdminOrders() {
                   </td>
                   <td className="py-3 px-4">
                     <Button variant="ghost" size="icon">
-                      <Eye className="w-4 h-4" />
+                      <Search className="w-4 h-4" />
                     </Button>
                   </td>
                 </tr>

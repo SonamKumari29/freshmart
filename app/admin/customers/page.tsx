@@ -1,124 +1,68 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Search, Mail, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
-const customers = [
-  {
-    id: "CUST001",
-    name: "Priya Sharma",
-    email: "priya.sharma@email.com",
-    phone: "+91 98765 43210",
-    orders: 12,
-    totalSpent: "₹15,499",
-    joinDate: "2024-01-15",
-  },
-  {
-    id: "CUST002",
-    name: "Amit Patel",
-    email: "amit.patel@email.com",
-    phone: "+91 98765 43211",
-    orders: 8,
-    totalSpent: "₹8,999",
-    joinDate: "2024-01-20",
-  },
-  {
-    id: "CUST003",
-    name: "Neha Gupta",
-    email: "neha.gupta@email.com",
-    phone: "+91 98765 43212",
-    orders: 15,
-    totalSpent: "₹22,499",
-    joinDate: "2024-01-10",
-  },
-  {
-    id: "CUST004",
-    name: "Rajesh Kumar",
-    email: "rajesh.kumar@email.com",
-    phone: "+91 98765 43213",
-    orders: 5,
-    totalSpent: "₹6,799",
-    joinDate: "2024-02-05",
-  },
-  {
-    id: "CUST005",
-    name: "Anita Singh",
-    email: "anita.singh@email.com",
-    phone: "+91 98765 43214",
-    orders: 10,
-    totalSpent: "₹12,899",
-    joinDate: "2024-01-25",
-  },
-];
-
-export default function AdminCustomers() {
+function SearchInput({ className, ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Customers</h1>
+    <div className="relative w-full sm:w-auto">
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+        <Search className="w-4 h-4" />
+      </div>
+      <Input
+        type="search"
+        className={`pl-9 max-w-sm w-full ${className}`}
+        {...props}
+      />
+    </div>
+  );
+}
+
+export default function CustomersPage() {
+  return (
+    <div className="container py-4 sm:py-6 lg:py-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold">Customers</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mt-1">
+            Manage your customer base
+          </p>
+        </div>
+        <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-4">
+          <SearchInput placeholder="Search customers..." />
+          <Button>Add Customer</Button>
+        </div>
       </div>
 
-      <Card className="p-6">
-        <div className="flex gap-4 mb-6">
-          <div className="flex-1">
-            <Input
-              placeholder="Search customers..."
-              className="max-w-sm"
-              prefix={<Search className="w-4 h-4 text-gray-400" />}
-            />
-          </div>
-          <div className="flex gap-2">
-            <Button variant="outline">Filter</Button>
-            <Button variant="outline">Export</Button>
-          </div>
-        </div>
-
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b">
-                <th className="text-left py-3 px-4">ID</th>
-                <th className="text-left py-3 px-4">Name</th>
-                <th className="text-left py-3 px-4">Contact</th>
-                <th className="text-left py-3 px-4">Orders</th>
-                <th className="text-left py-3 px-4">Total Spent</th>
-                <th className="text-left py-3 px-4">Join Date</th>
-                <th className="text-left py-3 px-4">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {customers.map((customer) => (
-                <tr key={customer.id} className="border-b">
-                  <td className="py-3 px-4">{customer.id}</td>
-                  <td className="py-3 px-4">{customer.name}</td>
-                  <td className="py-3 px-4">
-                    <div className="space-y-1">
-                      <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
-                        <Mail className="w-4 h-4 mr-2" />
-                        {customer.email}
-                      </div>
-                      <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
-                        <Phone className="w-4 h-4 mr-2" />
-                        {customer.phone}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="py-3 px-4">{customer.orders}</td>
-                  <td className="py-3 px-4">{customer.totalSpent}</td>
-                  <td className="py-3 px-4">
-                    {new Date(customer.joinDate).toLocaleDateString()}
-                  </td>
-                  <td className="py-3 px-4">
-                    <Button variant="outline" size="sm">View Details</Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </Card>
+      {/* Customer List */}
+      <div className="grid gap-4 sm:gap-6">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <Card key={index} className="p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row justify-between gap-4">
+              <div>
+                <h3 className="text-lg font-semibold">Customer #{index + 1}</h3>
+                <div className="space-y-1 mt-2">
+                  <p className="text-sm text-muted-foreground">
+                    Email: customer{index + 1}@example.com
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Phone: +91 98765-4321{index}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Location: Mumbai, India
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-2 sm:items-start">
+                <Button variant="outline" size="sm">View Orders</Button>
+                <Button variant="outline" size="sm">Edit Details</Button>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 } 

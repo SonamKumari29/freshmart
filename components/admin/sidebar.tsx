@@ -7,7 +7,13 @@ import { ChevronRight, LayoutDashboard, Package, ShoppingCart, Users, Settings, 
 import Link from "next/link"
 import { useState } from "react"
 
-const adminRoutes = [
+interface AdminRoute {
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  href: string;
+}
+
+const adminRoutes: AdminRoute[] = [
   {
     label: 'Dashboard',
     icon: LayoutDashboard,

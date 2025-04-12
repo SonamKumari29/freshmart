@@ -1,125 +1,129 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Search, Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Plus, Search, Edit, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
-const products = [
-  {
-    id: "PRD001",
-    name: "Fresh Alphonso Mangoes",
-    category: "Fruits",
-    price: "₹599",
-    stock: 45,
-    status: "In Stock",
-  },
-  {
-    id: "PRD002",
-    name: "Organic Mixed Vegetables Pack",
-    category: "Vegetables",
-    price: "₹299",
-    stock: 30,
-    status: "Low Stock",
-  },
-  {
-    id: "PRD003",
-    name: "Fresh Farm Eggs",
-    category: "Dairy & Eggs",
-    price: "₹89",
-    stock: 100,
-    status: "In Stock",
-  },
-  {
-    id: "PRD004",
-    name: "Whole Wheat Bread",
-    category: "Bakery",
-    price: "₹45",
-    stock: 0,
-    status: "Out of Stock",
-  },
-  {
-    id: "PRD005",
-    name: "Organic Milk",
-    category: "Dairy & Eggs",
-    price: "₹62",
-    stock: 25,
-    status: "In Stock",
-  },
-];
-
-export default function AdminProducts() {
+function SearchInput({ className, ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Products</h1>
-        <Button>
-          <Plus className="w-4 h-4 mr-2" />
-          Add Product
-        </Button>
+    <div className="relative w-full sm:w-auto">
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+        <Search className="w-4 h-4" />
+      </div>
+      <Input
+        type="search"
+        className={`pl-9 max-w-sm w-full ${className}`}
+        {...props}
+      />
+    </div>
+  );
+}
+
+export default function ProductsPage() {
+  const products = [
+    {
+      id: "PROD001",
+      name: "Fresh Alphonso Mangoes",
+      category: "Fruits",
+      price: "₹599",
+      stock: 50,
+      unit: "kg",
+      image: "/mangoes.jpg"
+    },
+    {
+      id: "PROD002",
+      name: "Organic Tomatoes",
+      category: "Vegetables",
+      price: "₹49",
+      stock: 100,
+      unit: "kg",
+      image: "/tomatoes.jpg"
+    },
+    {
+      id: "PROD003",
+      name: "Farm Fresh Eggs",
+      category: "Dairy & Eggs",
+      price: "₹89",
+      stock: 200,
+      unit: "dozen",
+      image: "/eggs.jpg"
+    },
+    {
+      id: "PROD004",
+      name: "Whole Wheat Bread",
+      category: "Bakery",
+      price: "₹45",
+      stock: 30,
+      unit: "pack",
+      image: "/bread.jpg"
+    },
+    {
+      id: "PROD005",
+      name: "Organic Milk",
+      category: "Dairy & Eggs",
+      price: "₹62",
+      stock: 80,
+      unit: "litre",
+      image: "/milk.jpg"
+    }
+  ];
+
+  return (
+    <div className="h-full flex-1 flex-col space-y-8 p-8 md:flex">
+      <div className="flex items-center justify-between space-y-2">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">Products</h2>
+          <p className="text-muted-foreground">
+            Manage your product inventory and stock levels
+          </p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <SearchInput placeholder="Search products..." className="w-[150px] lg:w-[250px]" />
+          <Button variant="outline">
+            Filter
+          </Button>
+          <Button>
+            <Plus className="mr-2 h-4 w-4" /> Add Product
+          </Button>
+        </div>
       </div>
 
-      <Card className="p-6">
-        <div className="flex gap-4 mb-6">
-          <div className="flex-1">
-            <Input
-              placeholder="Search products..."
-              className="max-w-sm"
-              prefix={<Search className="w-4 h-4 text-gray-400" />}
-            />
-          </div>
-          <div className="flex gap-2">
-            <Button variant="outline">Filter</Button>
-            <Button variant="outline">Sort</Button>
-          </div>
-        </div>
-
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b">
-                <th className="text-left py-3 px-4">ID</th>
-                <th className="text-left py-3 px-4">Name</th>
-                <th className="text-left py-3 px-4">Category</th>
-                <th className="text-left py-3 px-4">Price</th>
-                <th className="text-left py-3 px-4">Stock</th>
-                <th className="text-left py-3 px-4">Status</th>
-                <th className="text-left py-3 px-4">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product.id} className="border-b">
-                  <td className="py-3 px-4">{product.id}</td>
-                  <td className="py-3 px-4">{product.name}</td>
-                  <td className="py-3 px-4">{product.category}</td>
-                  <td className="py-3 px-4">{product.price}</td>
-                  <td className="py-3 px-4">{product.stock}</td>
-                  <td className="py-3 px-4">
-                    <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
-                      product.status === "In Stock" ? "bg-green-100 text-green-800" :
-                      product.status === "Low Stock" ? "bg-yellow-100 text-yellow-800" :
-                      "bg-red-100 text-red-800"
-                    }`}>
-                      {product.status}
-                    </span>
-                  </td>
-                  <td className="py-3 px-4">
-                    <div className="flex gap-2">
-                      <Button variant="ghost" size="icon">
-                        <Edit className="w-4 h-4" />
-                      </Button>
-                      <Button variant="ghost" size="icon">
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </Card>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {products.map((product) => (
+          <Card key={product.id} className="flex flex-col overflow-hidden">
+            <div className="aspect-square relative">
+              <div className="absolute inset-0 flex items-center justify-center bg-secondary/10">
+                <div className="text-2xl font-bold text-muted-foreground">
+                  {product.name[0]}
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-1 flex-col justify-between p-6">
+              <div className="space-y-1">
+                <h3 className="font-semibold leading-none tracking-tight">{product.name}</h3>
+                <p className="text-sm text-muted-foreground">{product.category}</p>
+              </div>
+              <div className="mt-4 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="font-medium">{product.price}</span>
+                  <span className={`text-sm ${
+                    product.stock > 50 ? "text-green-600" :
+                    product.stock > 20 ? "text-yellow-600" :
+                    "text-red-600"
+                  }`}>
+                    Stock: {product.stock} {product.unit}
+                  </span>
+                </div>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" className="flex-1">Edit</Button>
+                  <Button variant="outline" size="sm" className="flex-1">View</Button>
+                </div>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 } 

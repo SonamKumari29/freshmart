@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "./button";
+import { motion } from "framer-motion";
 
 export function Footer() {
   return (
@@ -17,89 +18,110 @@ export function Footer() {
               Your one-stop shop for fresh groceries and daily essentials
             </p>
             <div className="flex gap-1.5">
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors p-1 hover:bg-gray-700 rounded-full">
+              <motion.a 
+                href="#" 
+                className="text-gray-300 hover:text-primary transition-colors p-1 hover:bg-gray-700 rounded-full"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Facebook className="w-3.5 h-3.5" />
                 <span className="sr-only">Facebook</span>
-              </a>
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors p-1 hover:bg-gray-700 rounded-full">
-                <Twitter className="w-3.5 h-3.5" />
-                <span className="sr-only">Twitter</span>
-              </a>
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors p-1 hover:bg-gray-700 rounded-full">
+              </motion.a>
+              
+              <motion.a 
+                href="#" 
+                className="text-gray-300 hover:text-primary transition-colors p-1 hover:bg-gray-700 rounded-full"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Instagram className="w-3.5 h-3.5" />
                 <span className="sr-only">Instagram</span>
-              </a>
+              </motion.a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
             <h4 className="text-xs sm:text-sm font-semibold mb-1.5 text-primary">Quick Links</h4>
-            <ul className="space-y-0.5">
-              <li>
+            <ul className="space-y-1">
+              <motion.li whileHover={{ x: 5 }}>
                 <Link href="/why-choose-us" className="text-[11px] sm:text-xs text-gray-300 hover:text-primary transition-colors inline-block py-0.5">
                   Why Choose Us
                 </Link>
-              </li>
-              <li>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }}>
                 <Link href="/deals" className="text-[11px] sm:text-xs text-gray-300 hover:text-primary transition-colors inline-block py-0.5">
                   Deals & Offers
                 </Link>
-              </li>
-              <li>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }}>
                 <Link href="/categories" className="text-[11px] sm:text-xs text-gray-300 hover:text-primary transition-colors inline-block py-0.5">
                   Categories
                 </Link>
-              </li>
+              </motion.li>
             </ul>
           </div>
 
           {/* Customer Service */}
           <div>
             <h4 className="text-xs sm:text-sm font-semibold mb-1.5 text-primary">Customer Service</h4>
-            <ul className="space-y-0.5">
-              <li>
+            <ul className="space-y-1">
+              <motion.li whileHover={{ x: 5 }}>
                 <Link href="/faq" className="text-[11px] sm:text-xs text-gray-300 hover:text-primary transition-colors inline-block py-0.5">
                   FAQ
                 </Link>
-              </li>
-              <li>
-                <Link href="/shipping" className="text-[11px] sm:text-xs text-gray-300 hover:text-primary transition-colors inline-block py-0.5">
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }}>
+                <Link href="/shipping-info" className="text-[11px] sm:text-xs text-gray-300 hover:text-primary transition-colors inline-block py-0.5">
                   Shipping Info
                 </Link>
-              </li>
-              <li>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }}>
                 <Link href="/returns" className="text-[11px] sm:text-xs text-gray-300 hover:text-primary transition-colors inline-block py-0.5">
                   Returns
                 </Link>
-              </li>
+              </motion.li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div className="col-span-2 sm:col-span-2 md:col-span-1">
             <h4 className="text-xs sm:text-sm font-semibold mb-1.5 text-primary">Contact Us</h4>
-            <ul className="space-y-1.5 text-[11px] sm:text-xs">
-              <li className="flex items-start text-gray-300">
+            <ul className="space-y-1">
+              <motion.li 
+                className="flex items-start text-gray-300"
+                whileHover={{ x: 5 }}
+              >
                 <MapPin className="w-3.5 h-3.5 mr-1 text-primary shrink-0 mt-0.5" />
                 <span>123 Grocery Street, Mumbai, India</span>
-              </li>
-              <li className="flex items-center text-gray-300">
+              </motion.li>
+              <motion.li 
+                className="flex items-center text-gray-300"
+                whileHover={{ x: 5 }}
+              >
                 <Phone className="w-3.5 h-3.5 mr-1 text-primary shrink-0" />
                 <span>+91-98765-43210</span>
-              </li>
-              <li className="flex items-center text-gray-300">
+              </motion.li>
+              <motion.li 
+                className="flex items-center text-gray-300"
+                whileHover={{ x: 5 }}
+              >
                 <Mail className="w-3.5 h-3.5 mr-1 text-primary shrink-0" />
                 <span>support@freshmart.com</span>
-              </li>
+              </motion.li>
             </ul>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-gray-700 mt-4 pt-3 text-center text-gray-300 text-[10px] sm:text-xs">
+        <motion.div 
+          className="border-t border-gray-700 mt-4 pt-3 text-center text-gray-300 text-[10px] sm:text-xs"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <p>&copy; {new Date().getFullYear()} FreshMart. All rights reserved.</p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

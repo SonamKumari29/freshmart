@@ -103,7 +103,7 @@ export function MainNav() {
               key={route.href}
               href={route.href}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
+                "text-base font-medium transition-colors hover:text-primary",
                 route.active ? "text-primary" : "text-muted-foreground"
               )}
             >
@@ -116,7 +116,7 @@ export function MainNav() {
             <Input
               type="search"
               placeholder="Search products..."
-              className="h-10 w-[150px] lg:w-[200px] text-sm"
+              className="h-10 w-[150px] lg:w-[200px] text-base"
             />
             <Button variant="ghost" size="icon" className="h-10 w-10">
               <Search className="h-5 w-5" />

@@ -47,11 +47,11 @@ export function MainNav() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 sm:h-16 items-center justify-between px-4 sm:px-8">
+      <div className="container flex h-16 sm:h-20 items-center justify-between px-4 sm:px-8">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
-              <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
+              <Menu className="h-6 w-6 sm:h-7 sm:w-7" />
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
@@ -95,7 +95,7 @@ export function MainNav() {
           </SheetContent>
         </Sheet>
         <Link href="/" className="flex items-center space-x-2">
-          <span className="text-xl sm:text-2xl font-bold text-primary">FreshMart</span>
+          <span className="text-2xl sm:text-3xl font-bold text-primary">FreshMart</span>
         </Link>
         <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
           {routes.map((route) => (
@@ -116,31 +116,31 @@ export function MainNav() {
             <Input
               type="search"
               placeholder="Search products..."
-              className="h-8 w-[150px] lg:w-[200px] text-sm"
+              className="h-10 w-[150px] lg:w-[200px] text-sm"
             />
-            <Button variant="ghost" size="icon" className="h-8 w-8">
-              <Search className="h-4 w-4" />
+            <Button variant="ghost" size="icon" className="h-10 w-10">
+              <Search className="h-5 w-5" />
               <span className="sr-only">Search</span>
             </Button>
           </div>
           <div className="flex items-center space-x-1 sm:space-x-2">
             <ThemeToggle />
-            <Button variant="ghost" size="icon" asChild className="h-8 w-8 sm:h-9 sm:w-9">
+            <Button variant="ghost" size="icon" asChild className="h-10 w-10 sm:h-11 sm:w-11">
               <Link href="/profile">
-                <User className="h-4 w-4 sm:h-5 sm:w-5" />
+                <User className="h-5 w-5 sm:h-6 sm:w-6" />
                 <span className="sr-only">Profile</span>
               </Link>
             </Button>
-            <Button variant="ghost" size="icon" asChild className="h-8 w-8 sm:h-9 sm:w-9">
+            <Button variant="ghost" size="icon" asChild className="h-10 w-10 sm:h-11 sm:w-11">
               <Link href="/delivery">
-                <Truck className="h-4 w-4 sm:h-5 sm:w-5" />
+                <Truck className="h-5 w-5 sm:h-6 sm:w-6" />
                 <span className="sr-only">Delivery</span>
               </Link>
             </Button>
             <Notifications />
-            <Button variant="ghost" size="icon" asChild className="h-8 w-8 sm:h-9 sm:w-9">
+            <Button variant="ghost" size="icon" asChild className="h-10 w-10 sm:h-11 sm:w-11">
               <Link href="/cart">
-                <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
+                <ShoppingCart className="h-5 w-5 sm:h-6 sm:w-6" />
                 <span className="sr-only">Cart</span>
               </Link>
             </Button>

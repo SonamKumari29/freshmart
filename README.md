@@ -5,7 +5,6 @@
 
 🧪 Fully hardcoded for now  
 🛠 Backend coming soon  
-🤝 Open for contributions
 
 🔗 **Live:** [freshmart-bice.vercel.app](https://freshmart-bice.vercel.app)  
 ---
@@ -60,30 +59,7 @@ npm run dev
 
 ---
 
-## 🤝 Contributing
 
-FreshMart is open for collaboration! Want to help with UI, bugs, or future backend? You’re welcome.
-
-### Quick Start:
-
-```bash
-# create branch
-git checkout -b feature/your-feature
-
-# after changes
-git add .
-git commit -m "feat: your message"
-git push origin feature/your-feature
-```
-
-Then [open a Pull Request](https://github.com/SonamKumari29/freshmart/pulls)
-
-📌 **Tips:**
-- Keep code clean & readable
-- Discuss major changes via issues
-- Screenshots help for UI edits
-
----
 
 ## 💬 Connect With Me
 
